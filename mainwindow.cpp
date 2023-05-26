@@ -1,6 +1,15 @@
 #include "mainwindow.h"
+#include "form.h"
+#include "form2.h"
 #include "ui_mainwindow.h"
+#include "ui_form.h"
+#include "ui_form2.h"
 #include<QMessageBox>
+#include <QtSql>
+#include <QDialog>
+#include<QWidget>
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -8,6 +17,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     qDebug() << QSqlDatabase::drivers();
+
+
+
+
 
 }
 
@@ -22,19 +35,27 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_DbConnect_clicked()
 {
-    QSqlDatabase db= QSqlDatabase::addDatabase("QMYSQL");
-               db.setHostName("127.0.0.1");
-                db.setUserName("root");
-                db.setPassword("");
-                db.setDatabaseName("mysql");
 
 
-                if(db.open()){
+
+
+    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
+
+    mydb.setDatabaseName("C:/Users/vkocz/OneDrive/Dokumenty/DB/logowanie.db");
+
+
+
+
+                if(mydb.open()){
 
 
 
 
                    QMessageBox::information(this,"Connection","Database Connected Successfully");
+
+                    ui->DbConnect->hide();
+                   ui->label->setText("Połączono z Bazą Danych");
+
                }
                else{
 
@@ -43,5 +64,45 @@ void MainWindow::on_DbConnect_clicked()
 
 
                }
+
+
+
+
+
+}
+
+
+void MainWindow::on_pushButton_register_clicked()
+{
+
+
+
+              // this->hide();
+
+
+
+               Form formularz;
+
+               formularz.show();
+
+               auto mm = new Form();
+               mm->setAttribute(Qt::WA_DeleteOnClose);
+               mm->show();
+
+
+
+}
+
+
+void MainWindow::on_pushButton_login_clicked()
+{
+               Form2 login;
+
+               auto mc = new Form2();
+               mc->setAttribute(Qt::WA_DeleteOnClose);
+               mc->show();
+
+
+
 }
 

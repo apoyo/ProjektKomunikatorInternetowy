@@ -1,5 +1,8 @@
-#ifndef FORM_H
-#define FORM_H
+#ifndef FORM2_H
+#define FORM2_H
+
+#include <QWidget>
+#include <QDialog>
 #include <QMainWindow>
 #include<QtSql>
 #include<QSqlDatabase>
@@ -10,28 +13,26 @@
 #include <QWidget>
 #include <QTcpServer>
 
-
 namespace Ui {
-class Form;
+class Form2;
 }
 
-class Form : public QWidget
+class Form2 : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Form(QWidget *parent = nullptr);
-    ~Form();
+    explicit Form2(QWidget *parent = nullptr);
+    ~Form2();
 
 private slots:
     void on_pushButton_clicked();
 
-    void on_pushButton_2_clicked();
-
-    void on_dbC_clicked();
+signals:
+    void transfer(QString);
 
 private:
-    Ui::Form *ui;
+    Ui::Form2 *ui;
 };
 
-#endif // FORM_H
+#endif // FORM2_H
